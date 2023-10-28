@@ -272,7 +272,7 @@ function generate(characters, maps, names) {
 
     if (characterPool.length < charactersForEachPlayer * numberOfPlayers) {
         console.log("not enough characters")
-        return
+        //return
 
     }
 
