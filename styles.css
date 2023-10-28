@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(15, 15, 15);
+    font-family: 'Montserrat';
+    height: 100vh;
+
+
+}
+
+.flexbox {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+    flex-direction: column;
+}
+
+.test-style {
+    margin-top: 20px;
+    background-color: aliceblue;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: larger;
+    cursor: pointer;
+    list-style-type: none;
+}
+
+.output {
+    display: flex;
+    flex-direction: column;
+}
+
+.players-output {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 15px;
+
+}
+
+.character-images {
+    padding: 10px;
+    padding-top: 30px;
+}
+
+.char-img {
+    width: 26vh;
+
+}
+
+.map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.map-img {
+    padding: 10px;
+    min-width: 18%;
+    min-height: 18%;
+    max-width: 40%;
+
+}
+
+h2 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}

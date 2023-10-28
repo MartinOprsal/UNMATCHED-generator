@@ -1,0 +1,45 @@
+{
+    "sets": [
+        {
+            "name": "Battle of Legends, Volume One",
+            "characters": [
+                "alice",
+                "medusa",
+                "king-arthur",
+                "sinbad"
+            ],
+            "maps": [
+                "marmoreal",
+                "sarpedon"
+            ],
+            "id": 0
+        },
+        {
+            "name": "Cobble & Fog",
+            "characters": [
+                "sherlock-holmes",
+                "dracula",
+                "jekyll-and-hyde",
+                "invisible-man"
+            ],
+            "maps": [
+                "soho",
+                "baskerville-manor"
+            ],
+            "id": 1
+        },
+        {
+            "name": "Battle of Legends, Volume Two",
+            "characters": [
+                "achilles",
+                "bloody-mary",
+                "sun-wukong",
+                "yennenga"
+            ],
+            "maps": [
+                "hanging-gardens"
+            ],
+            "id": 2
+        }
+    ]
+}

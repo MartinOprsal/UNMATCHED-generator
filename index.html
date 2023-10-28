@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>test</title>
+    <script type="module" src="script.js"></script>
+</head>
+
+<body>
+
+    <div class="flexbox">
+        <div class="adding-players">
+            <!------------------------- ADDING PLAYERS ------------------->
+            <ul class="test-style" id="listOfPlayers">
+                <li>Martin</li>
+                <li>Martin 2</li>
+            </ul>
+            <input class="test-style" id="playerToAdd" type="text">
+            <button class="test-style" id="addPlayer">ADD PLAYER</button>
+        </div>
+
+        <!------------------------- FIRST INDEX CHECKBOX ------------------->
+        <div class="checkbox test-style">
+            <p>Determine who goes first: <input id="first-checkbox" type="checkbox" checked></p>
+        </div>
+
+        <!------------------------- SETS CHECKBOX ------------------->
+        <div class="checkbox test-style">
+            <h2>Sets to use:</h2>
+            <p>Battle of Legends, Volume One: <input id="0" type="checkbox" checked></p>
+            <p>Cobble & Fog: <input id="1" type="checkbox" checked></p>
+            <p>Battle of Legends, Volume Two: <input id="2" type="checkbox" checked></p>
+        </div>
+
+
+        <!---------------------- GENERATE BUTTON------------------>
+
+        <button id="generate-button" class="test-style">GENERATE</button>
+    </div>
+
+
+
+
+
+    <!---------------------- GENERATED OUTPUT------------------>
+    <div id="output-div" class="output test-style">
+
+    </div>
+
+
+
+</body>
+
+</html>
