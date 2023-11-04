@@ -92,7 +92,7 @@ function createPlayerUI(array, playersOutput, output) {
 
     for (let i = 0; i < array.length; i++) { // creates one player div with images
         let player = document.createElement("div")
-        player.classList.add("player")
+        player.classList.add(`player${i}`)
 
         let playerName = document.createElement("h2")
         playerName.classList.add("player-name")
@@ -131,6 +131,12 @@ function createMapUI(array, playersOutput, output) {
             let mapDiv = document.createElement("div")
             mapDiv.classList.add("map")
 
+            let mapName = document.createElement("h2")
+            mapName.textContent = transformString(array[i].map)
+
+            mapDiv.appendChild(mapName)
+
+
             let mapImage = document.createElement("img")
             mapImage.setAttribute("src", `img/maps/${array[i].map}.jpg`)
 
@@ -167,9 +173,54 @@ function generateOutput(playerPairs) { // generates UI for players
 }
 
 
+function transformString(inputString) {
+    const words = inputString.split('-');
+    const capitalizedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1));
+    const transformedString = capitalizedWords.join(' ');
+    return transformedString;
+}
+
+
+/////////////////////////// EVENT LISTENERS ///////////////////////////
+const numberForEach = document.getElementById("characters-for-each")
+const spreadCheckbox = document.getElementById("spread")
+
+spreadCheckbox.addEventListener("click", function () {
+    let text = document.querySelector(".char-for-each-text")
+    if (text.style.color === "black") {
+        text.style.color = "grey"
+    } else {
+        text.style.color = "black"
+    }
+
+
+    numberForEach.value = 0
+})
+
+numberForEach.addEventListener("click", function () {
+    spreadCheckbox.checked = false
+    const text = document.querySelector(".char-for-each-text")
+    text.style.color = "black"
+})
+
+
+
 const generateButton = document.getElementById("generate-button").addEventListener("click", generate)
 
 //////////////////////////////////////////    FUNCTIONS  FOR LIST    ////////////////////////////////////////////////////////
+
+
+function removePlayer(event) {
+
+    let listItem = event.target.parentNode;
+
+    // Get the <ul> element that contains the list of players
+    let listOfPlayers = listItem.parentNode;
+
+    // Remove the <li> element from the <ul>
+    listOfPlayers.removeChild(listItem);
+}
+
 
 function addPlayerFunction() {
     let list = document.getElementById("listOfPlayers")
@@ -180,6 +231,14 @@ function addPlayerFunction() {
     } else {
         let listItem = document.createElement("li")
         listItem.textContent = playerName
+
+
+        let crossIcon = document.createElement("i");
+        crossIcon.className = "fa-solid fa-xmark cross-icon";
+        crossIcon.addEventListener('click', removePlayer);
+
+        listItem.appendChild(crossIcon)
+
         list.appendChild(listItem)
 
         playerInput.value = " "
@@ -187,6 +246,16 @@ function addPlayerFunction() {
 
 
 }
+
+
+let crossIcons = document.querySelectorAll('.cross-icon');
+crossIcons.forEach(function (icon) {
+    icon.addEventListener('click', removePlayer);
+});
+
+
+
+
 
 const addPlayerButton = document.getElementById("addPlayer").addEventListener("click", addPlayerFunction)
 
@@ -205,6 +274,7 @@ function makeArrayFromList() {
     return namesArray
 
 }
+
 
 
 
@@ -249,13 +319,20 @@ function shrinkArray(array, charactersForEachPlayer, numberOfPlayers) {
     return array
 }
 
+function errorMessage() {
+    const output = document.getElementById("output-div")
+    let message = document.createElement("h2")
+    message.classList.add("error-msg")
+    message.textContent = "Insert an even number of players"
+    output.appendChild(message)
+}
+
 
 ///////////////////////////////////// GENERATE ///////////////////  
 
 
 function generate(characters, maps, names) {
 
-    let charactersForEachPlayer = 12
 
     maps = chooseMaps()
 
@@ -263,32 +340,60 @@ function generate(characters, maps, names) {
     let firstIndex = document.getElementById("first-checkbox").checked
     let numberOfPlayers = names.length
 
-    let players = []
+    if (numberOfPlayers % 2 === 1) {
+        const output = document.getElementById("output-div")
+        output.innerHTML = ""
+        errorMessage()
+        setTimeout(function () {
+            let whereToScroll = document.querySelector(".error-msg");
+            whereToScroll.scrollIntoView({ behavior: "smooth" });
+        }, 100);
 
 
-    players = createPlayers(numberOfPlayers, names)
+    } else {
 
-    let characterPool = chooseSets()
+        let players = []
 
-    if (characterPool.length < charactersForEachPlayer * numberOfPlayers) {
-        console.log("not enough characters")
-        //return
+
+        players = createPlayers(numberOfPlayers, names)
+
+        let characterPool = chooseSets()
+
+
+
+        if (document.getElementById("spread").checked === true) {
+            characters = chooseSets()
+        } else {
+            let charactersForEachPlayer = document.getElementById("characters-for-each").value
+            characters = shrinkArray(shuffleArray(characterPool), charactersForEachPlayer, numberOfPlayers)
+            console.log(characters)
+            if (characterPool.length < charactersForEachPlayer * numberOfPlayers) {
+                console.log("not enough characters")
+                return
+
+            }
+        }
+
+
+        assignCharacters(players, splitArray(shuffleArray(characters), numberOfPlayers), numberOfPlayers)
+
+        let playersToSplit = splitArray(players, players.length / 2)
+
+        if (firstIndex === true) {
+            whoIsFirst(playersToSplit, maps)
+        }
+
+        generateOutput(playersToSplit)
+
+        console.log(characters)
+
+        setTimeout(function () {
+            let whereToScroll = document.querySelector(".map");
+            whereToScroll.scrollIntoView({ behavior: "smooth" });
+        }, 100);
 
     }
 
-    characters = shrinkArray(shuffleArray(characterPool), charactersForEachPlayer, numberOfPlayers)
-
-
-
-    assignCharacters(players, splitArray(shuffleArray(characters), numberOfPlayers), numberOfPlayers)
-
-    let playersToSplit = splitArray(players, players.length / 2)
-
-    if (firstIndex === true) {
-        whoIsFirst(playersToSplit, maps)
-    }
-
-    generateOutput(playersToSplit)
 
 
 }
