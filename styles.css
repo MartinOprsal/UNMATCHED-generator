@@ -6,9 +6,8 @@
 
 body {
     background-color: rgb(15, 15, 15);
-    font-family: 'Montserrat';
-    height: 100vh;
-
+    font-family: 'Montserrat', sans-serif;
+    height: 100%;
 
 }
 
@@ -32,52 +31,94 @@ body {
     list-style-type: none;
 }
 
-.output {
-    display: flex;
-    flex-direction: column;
-}
 
-.players-output {
-    display: flex;
-    flex-direction: row;
-}
-
-
-.player {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding: 15px;
-
-}
-
-.character-images {
-    padding: 10px;
-    padding-top: 30px;
-}
-
-.char-img {
-    width: 26vh;
-
-}
-
-.map {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 20px;
-}
-
-.map-img {
-    padding: 10px;
-    min-width: 18%;
-    min-height: 18%;
-    max-width: 40%;
-
-}
 
 h2 {
     font-size: 25px;
     margin-bottom: 10px;
+}
+
+.cross-icon {
+    color: rgb(186, 53, 53);
+}
+
+
+.char-for-each-text {
+    color: gray;
+}
+
+
+
+
+
+
+
+/****************************** GENERATED OUTPUT  ********************************/
+
+.output {
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.error-msg {
+    padding: 300px;
+}
+
+.players-output {
+    max-width: 100%;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.player0 {
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player1 {
+    grid-column-start: 3;
+    grid-column-end: 3;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.map {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.character-images {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.character-images img {
+    max-width: 30vh;
+    padding-top: 5px;
+    padding-left: 5px;
+    border-radius: 10px;
 }
