@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles.css">
     <title>test</title>
     <script type="module" src="script.js"></script>
+    <script src="https://kit.fontawesome.com/71ba330703.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -16,11 +17,18 @@
         <div class="adding-players">
             <!------------------------- ADDING PLAYERS ------------------->
             <ul class="test-style" id="listOfPlayers">
-                <li>Martin</li>
-                <li>Martin 2</li>
+                <li>Martin <i class="fa-solid fa-xmark cross-icon"></i></li>
+                <li id="Martin 2">Martin 2 <i class="fa-solid fa-xmark cross-icon"></i></li>
             </ul>
             <input class="test-style" id="playerToAdd" type="text">
             <button class="test-style" id="addPlayer">ADD PLAYER</button>
+        </div>
+        <!------------------------- CHARACTER COUNT INDEX------------------->
+
+        <div class="checkbox test-style">
+            <p>Spread out the maximum: <input id="spread" type="checkbox" checked></p>
+            <p class="char-for-each-text">Characters for each player: <input id="characters-for-each" type="number"
+                    min="1" value="1"></p>
         </div>
 
         <!------------------------- FIRST INDEX CHECKBOX ------------------->
@@ -47,7 +55,7 @@
 
 
     <!---------------------- GENERATED OUTPUT------------------>
-    <div id="output-div" class="output test-style">
+    <div id="output-div" class="output">
 
     </div>
 
