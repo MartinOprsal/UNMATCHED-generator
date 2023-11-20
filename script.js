@@ -398,7 +398,7 @@ function generate(characters, maps, names) {
     let firstIndex = document.getElementById("first-checkbox").checked
     let numberOfPlayers = names.length
 
-    if (numberOfPlayers % 2 === 1) {
+    if (numberOfPlayers % 2 === 1 || numberOfPlayers === 0 ) {
         const output = document.getElementById("output-div")
         output.innerHTML = ""
         errorMessage("Insert an even number of players")
