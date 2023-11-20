@@ -97,7 +97,9 @@ function createPlayerUI(array, playersOutput, output) {
         let playerName = document.createElement("h2")
         playerName.classList.add("player-name")
         playerName.innerHTML = `${array[i].name}`
-
+        if (array[i].first === true) {
+            playerName.classList.add("first")
+        }
         player.appendChild(playerName)
 
         let characterImagesDiv = document.createElement("div")
@@ -182,8 +184,18 @@ function transformString(inputString) {
 
 
 /////////////////////////// EVENT LISTENERS ///////////////////////////
+const tournamentCheckbox = document.getElementById("tournament")
 const numberForEach = document.getElementById("characters-for-each")
 const spreadCheckbox = document.getElementById("spread")
+
+tournamentCheckbox.addEventListener("click", function () {
+    let text = document.querySelector(".num-of-rounds-text")
+    if (text.style.color === "black") {
+        text.style.color = "grey"
+    } else {
+        text.style.color = "black"
+    }
+})
 
 spreadCheckbox.addEventListener("click", function () {
     let text = document.querySelector(".char-for-each-text")
@@ -225,8 +237,8 @@ function removePlayer(event) {
 function addPlayerFunction() {
     let list = document.getElementById("listOfPlayers")
     let playerInput = document.getElementById("playerToAdd")
-    let playerName = playerInput.value
-    if (playerName == " ") {
+    let playerName = playerInput.value.trim()
+    if (playerName === "") {
         return false
     } else {
         let listItem = document.createElement("li")
@@ -276,6 +288,46 @@ function makeArrayFromList() {
 }
 
 
+///////////////////////////////// TOURNAMENT MODE ///////////////////////////////////////////
+
+
+
+function deepCopy(obj) {
+    return JSON.parse(JSON.stringify(obj));
+}
+
+function createPairings(players, numberOfRounds, characters, maps) {
+    if (players % 2 != 0) {
+        errorMessage("Insert an even number of players");
+    }
+
+    const pairings = [];
+    for (let round = 1; round <= numberOfRounds; round++) {
+        let roundPairings = [];
+
+        // Create a deep copy of the original players array for each round
+        let playersCopy = deepCopy(players);
+
+        // Assign characters to the copied players array
+        playersCopy = assignCharacters(playersCopy, splitArray(shuffleArray(characters), players.length), players.length);
+
+        for (let i = 0; i < playersCopy.length / 2; i++) {
+            let pairing = [playersCopy[i], playersCopy[playersCopy.length - 1 - i]];
+            roundPairings.push(pairing);
+        }
+        if (numberOfRounds > 1) {
+            whoIsFirst(roundPairings, maps)
+        }
+
+        pairings.push(roundPairings);
+
+        // Rotate players for the next round in the original array
+        players = [players[0]].concat(players.slice(2), players[1]);
+    }
+    return pairings;
+}
+
+
 
 
 //////////////////////////////////////////    FUNCTIONS  FOR SET CHOICE   ////////////////////////////////////////////////////////
@@ -319,11 +371,11 @@ function shrinkArray(array, charactersForEachPlayer, numberOfPlayers) {
     return array
 }
 
-function errorMessage() {
+function errorMessage(text) {
     const output = document.getElementById("output-div")
     let message = document.createElement("h2")
     message.classList.add("error-msg")
-    message.textContent = "Insert an even number of players"
+    message.textContent = `${text}`
     output.appendChild(message)
 }
 
@@ -332,18 +384,24 @@ function errorMessage() {
 
 
 function generate(characters, maps, names) {
+    let textDiv = document.getElementById("tournament-text")
+    let buttonOutput = document.getElementById("tournament-buttons")
+    textDiv.classList.add("hidden")
+    buttonOutput.classList.add("hidden")
 
+    buttonOutput.innerHTML = ""
 
     maps = chooseMaps()
 
     names = makeArrayFromList()
+
     let firstIndex = document.getElementById("first-checkbox").checked
     let numberOfPlayers = names.length
 
     if (numberOfPlayers % 2 === 1) {
         const output = document.getElementById("output-div")
         output.innerHTML = ""
-        errorMessage()
+        errorMessage("Insert an even number of players")
         setTimeout(function () {
             let whereToScroll = document.querySelector(".error-msg");
             whereToScroll.scrollIntoView({ behavior: "smooth" });
@@ -357,8 +415,8 @@ function generate(characters, maps, names) {
 
         players = createPlayers(numberOfPlayers, names)
 
-        let characterPool = chooseSets()
 
+        let characterPool = chooseSets()
 
 
         if (document.getElementById("spread").checked === true) {
@@ -377,25 +435,60 @@ function generate(characters, maps, names) {
 
         assignCharacters(players, splitArray(shuffleArray(characters), numberOfPlayers), numberOfPlayers)
 
-        let playersToSplit = splitArray(players, players.length / 2)
 
-        if (firstIndex === true) {
-            whoIsFirst(playersToSplit, maps)
+        if (tournamentCheckbox.checked === true) {
+            textDiv.innerHTML = ""
+            buttonOutput.classList.remove("hidden")
+
+
+            let numberOfRounds = document.getElementById("number-of-rounds").value
+            let pairs = createPairings(players, numberOfRounds, characterPool, maps)
+
+            let output = document.getElementById("output-div")
+            output.innerHTML = ""
+            buttonOutput.innerHTML = ""
+            for (let i = 0; i < numberOfRounds; i++) {
+                let roundButton = document.createElement("button")
+                roundButton.classList.add("round-button")
+                roundButton.innerText = `Round ${i + 1}`
+
+                roundButton.addEventListener("click", function () {
+                    textDiv.classList.remove("hidden")
+                    textDiv.innerHTML = ""
+                    let roundText = document.createElement("h2")
+                    roundText.classList.add("round-text")
+                    roundText.innerText = `Round ${i + 1}`
+                    textDiv.appendChild(roundText)
+                    generateOutput(pairs[i])
+                    setTimeout(function () {
+                        let whereToScroll = document.querySelector(".map");
+                        whereToScroll.scrollIntoView({ behavior: "smooth" });
+                    }, 100)
+                })
+                buttonOutput.appendChild(roundButton)
+            }
+            setTimeout(function () {
+                let whereToScroll = document.querySelector("#tournament-buttons");
+                whereToScroll.scrollIntoView({ behavior: "smooth" });
+            }, 100)
+        } else {
+            textDiv.innerHTML = ""
+
+            let pairs = createPairings(players, 1, characterPool)
+
+            whoIsFirst(pairs[0], maps)
+
+            generateOutput(pairs[0])
+            setTimeout(function () {
+                let whereToScroll = document.querySelector(".map");
+                whereToScroll.scrollIntoView({ behavior: "smooth" });
+            }, 100);
         }
 
-        generateOutput(playersToSplit)
-
-        console.log(characters)
-
-        setTimeout(function () {
-            let whereToScroll = document.querySelector(".map");
-            whereToScroll.scrollIntoView({ behavior: "smooth" });
-        }, 100);
 
     }
 
-
-
 }
+
 
 
