@@ -19,9 +19,11 @@
     <div class="flexbox">
         <div class="adding-players">
             <!------------------------- ADDING PLAYERS ------------------->
+
             <ul class="test-style" id="listOfPlayers">
-                <li>Martin <i class="fa-solid fa-xmark cross-icon"></i></li>
-                <li id="Martin 2">Martin 2 <i class="fa-solid fa-xmark cross-icon"></i></li>
+                <h2 id="heading-players">Players:</h2>
+                <!-- <li>Martin <i class="fa-solid fa-xmark cross-icon"></i></li>
+                <li id="Martin 2">Martin 2 <i class="fa-solid fa-xmark cross-icon"></i></li> -->
             </ul>
             <input class="test-style" id="playerToAdd" type="text">
             <button class="test-style" id="addPlayer">ADD PLAYER</button>
@@ -32,6 +34,14 @@
             <p>Spread out the maximum: <input id="spread" type="checkbox" checked></p>
             <p class="char-for-each-text">Characters for each player: <input id="characters-for-each" type="number"
                     min="1" value="1"></p>
+        </div>
+
+        <!------------------------- TOURNAMENT MODE------------------->
+
+        <div class="checkbox test-style">
+            <p>Tournament mode: <input id="tournament" type="checkbox"></p>
+            <p class="num-of-rounds-text">Number of rounds: <input id="number-of-rounds" type="number" min="2"
+                    value="2"></p>
         </div>
 
         <!------------------------- FIRST INDEX CHECKBOX ------------------->
@@ -54,10 +64,9 @@
     </div>
 
 
-
-
-
     <!---------------------- GENERATED OUTPUT------------------>
+    <div id="tournament-buttons" class="hidden"></div>
+    <div id="tournament-text" class="hidden"></div>
     <div id="output-div" class="output">
 
     </div>
