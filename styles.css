@@ -4,6 +4,15 @@
     box-sizing: border-box;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
+.first {
+    color: rgb(189, 45, 45);
+    text-decoration: underline;
+}
+
 body {
     background-color: rgb(15, 15, 15);
     font-family: 'Montserrat', sans-serif;
@@ -31,24 +40,73 @@ body {
     list-style-type: none;
 }
 
+.test-style:focus {
+    outline: none;
+}
+
 
 
 h2 {
     font-size: 25px;
-    margin-bottom: 10px;
+    padding-bottom: 10px;
 }
 
 .cross-icon {
     color: rgb(186, 53, 53);
+    margin-left: 10px;
 }
 
 
 .char-for-each-text {
     color: gray;
+
+}
+
+#heading-players {
+    padding-bottom: 5px;
 }
 
 
+#characters-for-each {
+    font-family: "Montserrat";
+    border: 1px solid;
+    border-color: gray;
+    border-radius: 2px;
+    padding-left: 3px;
+}
 
+#characters-for-each:focus {
+    outline: none;
+    border: 1px solid;
+    border-color: gray;
+}
+
+#characters-for-each:hover {
+    border: none;
+    border: 1px solid;
+    border-color: gray;
+}
+
+
+#number-of-rounds {
+    font-family: "Montserrat";
+    border: 1px solid;
+    border-color: gray;
+    border-radius: 2px;
+    padding-left: 3px;
+}
+
+#number-of-rounds:focus {
+    outline: none;
+    border: 1px solid;
+    border-color: gray;
+}
+
+#number-of-rounds:hover {
+    border: none;
+    border: 1px solid;
+    border-color: gray;
+}
 
 
 
@@ -121,4 +179,41 @@ h2 {
     padding-top: 5px;
     padding-left: 5px;
     border-radius: 10px;
+}
+
+
+
+
+/****************************** TOURNAMENT BUTTONS  ********************************/
+
+
+#tournament-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    margin-bottom: 10vh;
+}
+
+
+#tournament-text {
+    background-color: aliceblue;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.round-button {
+    font-family: "Montserrat";
+    font-size: 18px;
+    font-weight: 600;
+    background-color: aliceblue;
+    height: 8vh;
+    width: 15vh;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+
+.num-of-rounds-text {
+    color: gray;
 }
