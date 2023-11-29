@@ -345,6 +345,7 @@ function chooseSets() {
         }
     }
 
+    charactersToUse = shuffleArray(charactersToUse)
     return charactersToUse;
 
 }
@@ -398,7 +399,7 @@ function generate(characters, maps, names) {
     let firstIndex = document.getElementById("first-checkbox").checked
     let numberOfPlayers = names.length
 
-    if (numberOfPlayers % 2 === 1 || numberOfPlayers === 0 ) {
+    if (numberOfPlayers % 2 === 1 || numberOfPlayers === 0) {
         const output = document.getElementById("output-div")
         output.innerHTML = ""
         errorMessage("Insert an even number of players")
@@ -415,21 +416,22 @@ function generate(characters, maps, names) {
 
         players = createPlayers(numberOfPlayers, names)
 
-
-        let characterPool = chooseSets()
+        let characterPool = []
 
 
         if (document.getElementById("spread").checked === true) {
-            characters = chooseSets()
+            characterPool = chooseSets()
         } else {
-            let charactersForEachPlayer = document.getElementById("characters-for-each").value
-            characters = shrinkArray(shuffleArray(characterPool), charactersForEachPlayer, numberOfPlayers)
+            characterPool = chooseSets().slice(0, numberForEach.value * 2)
+            characters = shrinkArray(characterPool, numberForEach.value, numberOfPlayers)
+            characters = shuffleArray(characters)
             console.log(characters)
-            if (characterPool.length < charactersForEachPlayer * numberOfPlayers) {
+            if (characterPool.length < numberForEach.value * numberOfPlayers) {
                 console.log("not enough characters")
                 return
 
             }
+
         }
 
 
@@ -442,7 +444,7 @@ function generate(characters, maps, names) {
 
 
             let numberOfRounds = document.getElementById("number-of-rounds").value
-            let pairs = createPairings(players, numberOfRounds, characterPool, maps)
+            let pairs = createPairings(players, numberOfRounds, characters, maps)
 
             let output = document.getElementById("output-div")
             output.innerHTML = ""
