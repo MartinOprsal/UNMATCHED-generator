@@ -3,6 +3,9 @@
 
 import setsData from "./setDatabase.json" assert { type: 'json' };;
 
+
+
+
 /////////////////////////////////////////    FUNCTIONS  FOR GENERATING   ////////////////////////////////////////////////////////
 
 
@@ -88,6 +91,7 @@ function whoIsFirst(array, maps) { // determines who goes first from the pair + 
 
 
 function createPlayerUI(array, playersOutput, output) {
+    let firstIndex = document.getElementById("first-checkbox").checked
 
 
     for (let i = 0; i < array.length; i++) { // creates one player div with images
@@ -97,9 +101,12 @@ function createPlayerUI(array, playersOutput, output) {
         let playerName = document.createElement("h2")
         playerName.classList.add("player-name")
         playerName.innerHTML = `${array[i].name}`
-        if (array[i].first === true) {
-            playerName.classList.add("first")
+        if (firstIndex === true) {
+            if (array[i].first === true) {
+                playerName.classList.add("first")
+            }
         }
+
         player.appendChild(playerName)
 
         let characterImagesDiv = document.createElement("div")
@@ -350,15 +357,18 @@ function chooseSets() {
 
 }
 
+
+
 function chooseMaps() {
     let mapsToUse = []
 
     for (let i = 0; i < setsData.sets.length; i++) {
         const setId = setsData.sets[i].id;
         const setCheckbox = document.getElementById(setId);
-
+        let n = Math.floor(Math.random() * (setsData.sets[i].maps.length))
+        console.log(n)
         if (setCheckbox && setCheckbox.checked) {
-            mapsToUse = mapsToUse.concat(setsData.sets[i].maps);
+            mapsToUse = mapsToUse.concat(setsData.sets[i].maps[n]);
         }
     }
 
@@ -396,7 +406,6 @@ function generate(characters, maps, names) {
 
     names = makeArrayFromList()
 
-    let firstIndex = document.getElementById("first-checkbox").checked
     let numberOfPlayers = names.length
 
     if (numberOfPlayers % 2 === 1 || numberOfPlayers === 0) {
@@ -421,6 +430,7 @@ function generate(characters, maps, names) {
 
         if (document.getElementById("spread").checked === true) {
             characterPool = chooseSets()
+            characters = characterPool
         } else {
             characterPool = chooseSets().slice(0, numberForEach.value * 2)
             characters = shrinkArray(characterPool, numberForEach.value, numberOfPlayers)
@@ -441,8 +451,6 @@ function generate(characters, maps, names) {
         if (tournamentCheckbox.checked === true) {
             textDiv.innerHTML = ""
             buttonOutput.classList.remove("hidden")
-
-
             let numberOfRounds = document.getElementById("number-of-rounds").value
             let pairs = createPairings(players, numberOfRounds, characters, maps)
 
@@ -450,6 +458,7 @@ function generate(characters, maps, names) {
             output.innerHTML = ""
             buttonOutput.innerHTML = ""
             for (let i = 0; i < numberOfRounds; i++) {
+                maps = chooseMaps()
                 let roundButton = document.createElement("button")
                 roundButton.classList.add("round-button")
                 roundButton.innerText = `Round ${i + 1}`
@@ -491,6 +500,12 @@ function generate(characters, maps, names) {
     }
 
 }
+
+
+
+console.log(setsData.sets[0].maps[0].name)
+
+
 
 
 
