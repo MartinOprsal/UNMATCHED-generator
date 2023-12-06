@@ -192,7 +192,7 @@ function transformString(inputString) {
 
 /////////////////////////// EVENT LISTENERS ///////////////////////////
 const tournamentCheckbox = document.getElementById("tournament")
-const numberForEach = document.getElementById("characters-for-each")
+let numberForEach = document.getElementById("characters-for-each")
 const spreadCheckbox = document.getElementById("spread")
 
 tournamentCheckbox.addEventListener("click", function () {
@@ -305,7 +305,7 @@ function deepCopy(obj) {
 
 function createPairings(players, numberOfRounds, characters, maps) {
     if (players % 2 != 0) {
-        errorMessage("Insert an even number of players");
+        // errorMessage("Insert an even number of players");
     }
 
     const pairings = [];
@@ -366,7 +366,6 @@ function chooseMaps() {
         const setId = setsData.sets[i].id;
         const setCheckbox = document.getElementById(setId);
         let n = Math.floor(Math.random() * (setsData.sets[i].maps.length))
-        console.log(n)
         if (setCheckbox && setCheckbox.checked) {
             mapsToUse = mapsToUse.concat(setsData.sets[i].maps[n]);
         }
@@ -397,6 +396,7 @@ function errorMessage(text) {
 function generate(characters, maps, names) {
     let textDiv = document.getElementById("tournament-text")
     let buttonOutput = document.getElementById("tournament-buttons")
+    const output = document.getElementById("output-div")
     textDiv.classList.add("hidden")
     buttonOutput.classList.add("hidden")
 
@@ -409,7 +409,6 @@ function generate(characters, maps, names) {
     let numberOfPlayers = names.length
 
     if (numberOfPlayers % 2 === 1 || numberOfPlayers === 0) {
-        const output = document.getElementById("output-div")
         output.innerHTML = ""
         errorMessage("Insert an even number of players")
         setTimeout(function () {
@@ -432,13 +431,18 @@ function generate(characters, maps, names) {
             characterPool = chooseSets()
             characters = characterPool
         } else {
+            numberForEach = document.getElementById("characters-for-each")
             characterPool = chooseSets().slice(0, numberForEach.value * 2)
             characters = shrinkArray(characterPool, numberForEach.value, numberOfPlayers)
             characters = shuffleArray(characters)
             console.log(characters)
             if (characterPool.length < numberForEach.value * numberOfPlayers) {
-                console.log("not enough characters")
-                return
+                output.innerHTML = ""
+                errorMessage("Not enough characters available")
+                setTimeout(function () {
+                    let whereToScroll = document.querySelector(".error-msg");
+                    whereToScroll.scrollIntoView({ behavior: "smooth" });
+                }, 100);
 
             }
 
@@ -452,36 +456,43 @@ function generate(characters, maps, names) {
             textDiv.innerHTML = ""
             buttonOutput.classList.remove("hidden")
             let numberOfRounds = document.getElementById("number-of-rounds").value
-            let pairs = createPairings(players, numberOfRounds, characters, maps)
-
             let output = document.getElementById("output-div")
-            output.innerHTML = ""
-            buttonOutput.innerHTML = ""
-            for (let i = 0; i < numberOfRounds; i++) {
-                maps = chooseMaps()
-                let roundButton = document.createElement("button")
-                roundButton.classList.add("round-button")
-                roundButton.innerText = `Round ${i + 1}`
+            let pairs = createPairings(players, numberOfRounds, characters, maps)
+            if (numberOfRounds > numberOfPlayers - 1) {
+                output.innerHTML = ""
+                buttonOutput.innerHTML = ""
+                errorMessage("Not enough players for the number of rounds")
 
-                roundButton.addEventListener("click", function () {
-                    textDiv.classList.remove("hidden")
-                    textDiv.innerHTML = ""
-                    let roundText = document.createElement("h2")
-                    roundText.classList.add("round-text")
-                    roundText.innerText = `Round ${i + 1}`
-                    textDiv.appendChild(roundText)
-                    generateOutput(pairs[i])
-                    setTimeout(function () {
-                        let whereToScroll = document.querySelector(".map");
-                        whereToScroll.scrollIntoView({ behavior: "smooth" });
-                    }, 100)
-                })
-                buttonOutput.appendChild(roundButton)
+            } else {
+
+                output.innerHTML = ""
+                buttonOutput.innerHTML = ""
+                for (let i = 0; i < numberOfRounds; i++) {
+                    maps = chooseMaps()
+                    let roundButton = document.createElement("button")
+                    roundButton.classList.add("round-button")
+                    roundButton.innerText = `Round ${i + 1}`
+
+                    roundButton.addEventListener("click", function () {
+                        textDiv.classList.remove("hidden")
+                        textDiv.innerHTML = ""
+                        let roundText = document.createElement("h2")
+                        roundText.classList.add("round-text")
+                        roundText.innerText = `Round ${i + 1}`
+                        textDiv.appendChild(roundText)
+                        generateOutput(pairs[i])
+                        setTimeout(function () {
+                            let whereToScroll = document.querySelector(".map");
+                            whereToScroll.scrollIntoView({ behavior: "smooth" });
+                        }, 100)
+                    })
+                    buttonOutput.appendChild(roundButton)
+                }
+                setTimeout(function () {
+                    let whereToScroll = document.querySelector("#tournament-buttons");
+                    whereToScroll.scrollIntoView({ behavior: "smooth" });
+                }, 100)
             }
-            setTimeout(function () {
-                let whereToScroll = document.querySelector("#tournament-buttons");
-                whereToScroll.scrollIntoView({ behavior: "smooth" });
-            }, 100)
         } else {
             textDiv.innerHTML = ""
 
@@ -491,9 +502,9 @@ function generate(characters, maps, names) {
 
             generateOutput(pairs[0])
             setTimeout(function () {
-                let whereToScroll = document.querySelector(".map");
-                whereToScroll.scrollIntoView({ behavior: "smooth" });
-            }, 100);
+                let whereToScroll = document.querySelector(".map")
+                whereToScroll.scrollIntoView({ behavior: "smooth" })
+            }, 100)
         }
 
 
