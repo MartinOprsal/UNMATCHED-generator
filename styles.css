@@ -5,7 +5,8 @@
 }
 
 .hidden {
-    visibility: hidden;
+    display: none;
+    padding: 0px !important;
 }
 
 .first {
@@ -138,6 +139,9 @@ h2 {
     padding-top: 30px;
     padding-bottom: 30px; */
     display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100%;
 }
 
 .player0 {
@@ -168,6 +172,7 @@ h2 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 20em;
 }
 
 .map img {
