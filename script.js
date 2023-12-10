@@ -432,7 +432,7 @@ function generate(characters, maps, names) {
             characters = characterPool
         } else {
             numberForEach = document.getElementById("characters-for-each")
-            characterPool = chooseSets().slice(0, numberForEach.value * 2)
+            characterPool = chooseSets().slice(0, numberForEach.value * numberOfPlayers)
             characters = shrinkArray(characterPool, numberForEach.value, numberOfPlayers)
             characters = shuffleArray(characters)
             console.log(characters)
@@ -447,6 +447,7 @@ function generate(characters, maps, names) {
             }
 
         }
+        console.log(characters)
 
 
         assignCharacters(players, splitArray(shuffleArray(characters), numberOfPlayers), numberOfPlayers)
