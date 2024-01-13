@@ -365,10 +365,15 @@ function chooseMaps() {
     for (let i = 0; i < setsData.sets.length; i++) {
         const setId = setsData.sets[i].id;
         const setCheckbox = document.getElementById(setId);
-        let n = Math.floor(Math.random() * (setsData.sets[i].maps.length))
-        if (setCheckbox && setCheckbox.checked) {
-            mapsToUse = mapsToUse.concat(setsData.sets[i].maps[n]);
+        if (setsData.sets[i].maps.length === 0) {
+            mapsToUse = mapsToUse
+        } else {
+            let n = Math.floor(Math.random() * (setsData.sets[i].maps.length))
+            if (setCheckbox && setCheckbox.checked) {
+                mapsToUse = mapsToUse.concat(setsData.sets[i].maps[n]);
+            }
         }
+
     }
 
     return mapsToUse
@@ -403,6 +408,7 @@ function generate(characters, maps, names) {
     buttonOutput.innerHTML = ""
 
     maps = chooseMaps()
+    console.log(maps)
 
     names = makeArrayFromList()
 
@@ -515,9 +521,7 @@ function generate(characters, maps, names) {
 
 
 
-console.log(setsData.sets[0].maps[0].name)
 
 
 
-
-
+console.log(setsData.sets[5].maps.length)
