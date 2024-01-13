@@ -40,6 +40,38 @@
                 "hanging-gardens"
             ],
             "id": 2
+        },
+        {
+            "name": "Redemption Row",
+            "characters": [
+                "luke-cage",
+                "ghost-rider",
+                "moon-knight"
+            ],
+            "maps": [
+                "the-raft"
+            ],
+            "id": 3
+        },
+        {
+            "name": "Robin Hood vs. Bigfoot",
+            "characters": [
+                "robin-hood",
+                "bigfoot"
+            ],
+            "maps": [
+                "sherwood-forest",
+                "yukon"
+            ],
+            "id": 4
+        },
+        {
+            "name": "Bruce Lee",
+            "characters": [
+                "bruce-lee"
+            ],
+            "maps": [],
+            "id": 5
         }
     ]
 }
