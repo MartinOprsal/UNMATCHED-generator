@@ -197,19 +197,19 @@ const spreadCheckbox = document.getElementById("spread")
 
 tournamentCheckbox.addEventListener("click", function () {
     let text = document.querySelector(".num-of-rounds-text")
-    if (text.style.color === "black") {
+    if (text.style.color === "white") {
         text.style.color = "grey"
     } else {
-        text.style.color = "black"
+        text.style.color = "white"
     }
 })
 
 spreadCheckbox.addEventListener("click", function () {
     let text = document.querySelector(".char-for-each-text")
-    if (text.style.color === "black") {
+    if (text.style.color === "white") {
         text.style.color = "grey"
     } else {
-        text.style.color = "black"
+        text.style.color = "white"
     }
 
 
@@ -477,7 +477,7 @@ function generate(characters, maps, names) {
                 for (let i = 0; i < numberOfRounds; i++) {
                     maps = chooseMaps()
                     let roundButton = document.createElement("button")
-                    roundButton.classList.add("round-button")
+                    roundButton.classList.add("purple")
                     roundButton.innerText = `Round ${i + 1}`
 
                     roundButton.addEventListener("click", function () {
