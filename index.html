@@ -3,79 +3,104 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>test</title>
+    <title>Document</title>
     <script type="module" src="script.js"></script>
     <script src="https://kit.fontawesome.com/71ba330703.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style-test.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cabin&family=Montserrat:wght@400;600&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
+    <div class="container" id="main-content">
 
-    <div class="flexbox" id="main-content">
-        <div class="adding-players">
+        <div class="content-container-row">
             <!------------------------- ADDING PLAYERS ------------------->
 
-            <ul class="test-style" id="listOfPlayers">
-                <h2 id="heading-players">Players:</h2>
-                <!-- <li>Martin <i class="fa-solid fa-xmark cross-icon"></i></li>
-                <li id="Martin 2">Martin 2 <i class="fa-solid fa-xmark cross-icon"></i></li> -->
-            </ul>
-            <input class="test-style" id="playerToAdd" type="text">
-            <button class="test-style" id="addPlayer">ADD PLAYER</button>
-        </div>
-        <!------------------------- CHARACTER COUNT INDEX------------------->
+            <div class="adding-players row-item">
+                <ul class="test-style" id="listOfPlayers">
+                    <h2>Players:</h2>
+                    <li>Martin <i class="fa-solid fa-xmark cross-icon"></i></li>
+                    <li id="Martin 2">Martin 2 <i class="fa-solid fa-xmark cross-icon"></i></li>
+                </ul>
+                <div class="adding-players-input">
+                    <input class="text-input" id="playerToAdd" type="text" maxlength="30">
+                    <button class="purple" id="addPlayer">ADD PLAYER</button>
+                </div>
 
-        <div class="checkbox test-style">
-            <p>Spread out the maximum: <input id="spread" type="checkbox" checked></p>
-            <p class="char-for-each-text">Characters for each player: <input id="characters-for-each" type="number"
-                    min="1" value="1"></p>
+            </div>
+
+
+            <!------------------------- CHARACTER COUNT INDEX------------------->
+
+            <div class="checkbox row-item">
+                <h2>Number of characters:</h2>
+                <div class="flex-row">
+                    <p>Spread out the maximum: <input id="spread" class="spread checker" type="checkbox" checked>
+                        <span class="checkmark"></span>
+                    </p>
+                </div>
+                <div class="flex-row">
+                    <p class="char-for-each-text">Characters for each player: <input id="characters-for-each"
+                            type="number" min="1" value="1" class="text-input"></p>
+                </div>
+
+            </div>
         </div>
 
-        <!------------------------- TOURNAMENT MODE------------------->
 
-        <div class="checkbox test-style">
-            <p>Tournament mode: <input id="tournament" type="checkbox"></p>
-            <p class="num-of-rounds-text">Number of rounds: <input id="number-of-rounds" type="number" min="2"
-                    value="2"></p>
+        <div class="content-container-row">
+            <!------------------------- TOURNAMENT MODE------------------->
+
+            <div class="checkbox row-item">
+                <h2>SPECIAL MODES:</h2>
+                <p>Tournament mode: <input id="tournament" type="checkbox"></p>
+                <p class="num-of-rounds-text">Number of rounds: <input id="number-of-rounds" type="number" min="2"
+                        value="2" class="text-input"></p>
+                <!------------------------- FIRST INDEX CHECKBOX ------------------->
+
+                <div class="checkbox">
+                    <p>Determine who goes first: <input id="first-checkbox" type="checkbox" checked></p>
+                </div>
+            </div>
+            <!------------------------- SETS CHECKBOX ------------------->
+
+            <div class="checkbox  row-item">
+                <h2>Sets to use:</h2>
+                <p>Battle of Legends, Volume One: <input class="checkbox" id="0" type="checkbox" checked></p>
+                <p>Cobble & Fog: <input id="1" type="checkbox" checked></p>
+                <p>Battle of Legends, Volume Two: <input id="2" type="checkbox" checked></p>
+                <p>Redemption Row: <input id="3" type="checkbox" checked></p>
+            </div>
         </div>
 
-        <!------------------------- FIRST INDEX CHECKBOX ------------------->
-        <div class="checkbox test-style">
-            <p>Determine who goes first: <input id="first-checkbox" type="checkbox" checked></p>
-        </div>
 
-        <!------------------------- SETS CHECKBOX ------------------->
-        <div class="checkbox test-style">
-            <h2>Sets to use:</h2>
-            <p>Battle of Legends, Volume One: <input id="0" type="checkbox" checked></p>
-            <p>Cobble & Fog: <input id="1" type="checkbox" checked></p>
-            <p>Battle of Legends, Volume Two: <input id="2" type="checkbox" checked></p>
-            <p>Redemption Row: <input id="3" type="checkbox" checked></p>
-        </div>
+
+
+
+
+
 
 
         <!---------------------- GENERATE BUTTON------------------>
+        <div class="content-container single-item">
+            <div class="button">
+                <button id="generate-button" class="red">GENERATE</button>
+            </div>
+        </div>
 
-        <button id="generate-button" class="test-style">GENERATE</button>
-    </div>
-
-
-
-
-    <!---------------------- GENERATED OUTPUT------------------>
-    <div id="tournament-buttons" class="hidden"></div>
-    <div id="tournament-text" class="hidden"></div>
-    <div id="output-div" class="output">
-
-    </div>
+        <!---------------------- GENERATED OUTPUT------------------>¨
+        <div id="tournament-buttons" class="hidden"></div>
+        <div id="tournament-text" class="hidden"></div>
+        <div id="output-div" class="output">
 
 
 
+        </div>
 </body>
 
 </html>
