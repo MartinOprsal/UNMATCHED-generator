@@ -228,7 +228,12 @@
  @media (max-width: 971px) {
      .content-container-row {
          flex-direction: column;
-         gap: 15px
+         gap: 15px;
+         max-width: 80%;
+     }
+
+     .content-container {
+         max-width: 0%;
      }
  }
 
@@ -333,9 +338,10 @@
      display: flex;
      align-items: center;
      justify-content: center;
-     min-width: 100%;
+     width: 100%;
      padding-top: 15px;
-     border-bottom: 5px solid rgba(255, 255, 255, 0.744);
+     padding-bottom: 15px;
+     border-bottom: 5px solid #71111A;
  }
 
  .players-output:last-child {
@@ -402,4 +408,18 @@
          padding-top: 4em;
          padding-bottom: 4em;
      }
+ }
+
+ .scroll {
+     overflow-y: auto;
+     width: auto;
+     max-height: 180px;
+ }
+
+ #set-choice p {
+     margin-top: 10px;
+ }
+
+ #set-choice p:first-child {
+     margin-top: 0px;
  }
