@@ -124,7 +124,6 @@
      align-items: left;
      background-color: rgba(0, 0, 0, 0.711);
      padding: 20px;
-     /* border: 1px solid red; */
 
  }
 
@@ -233,7 +232,7 @@
      }
 
      .content-container {
-         max-width: 0%;
+         max-width: 80%;
      }
  }
 
@@ -274,7 +273,7 @@
      margin: 0 auto;
      align-items: center;
      justify-content: center;
-     padding: 10em;
+     padding: 8em;
      margin-top: 1em;
  }
 
@@ -334,7 +333,6 @@
  }
 
  .players-output {
-
      display: flex;
      align-items: center;
      justify-content: center;
@@ -397,6 +395,12 @@
      max-width: 10em;
      padding-top: 1em;
      padding-left: 1em;
+ }
+
+ @media (max-width: 577px) {
+     .character-images img {
+         max-width: 7em;
+     }
  }
 
  @media (max-width:1200px) {
