@@ -3,6 +3,32 @@
 
 import setsData from "./setDatabase.json" assert { type: 'json' };;
 
+// Function to save checkbox states in local storage
+function saveCheckboxStates() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((checkbox) => {
+        localStorage.setItem(checkbox.id, checkbox.checked);
+    });
+}
+
+// Function to load checkbox states from local storage
+function loadCheckboxStates() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((checkbox) => {
+        const isChecked = localStorage.getItem(checkbox.id) === 'true';
+        checkbox.checked = isChecked;
+    });
+}
+
+// Load checkbox states on page load
+Window.onload = loadCheckboxStates();
+
+// Add event listener to checkboxes to save states when changed
+document.getElementById('set-choice').addEventListener('change', (event) => {
+    if (event.target.type === 'checkbox') {
+        saveCheckboxStates();
+    }
+});
 
 
 
