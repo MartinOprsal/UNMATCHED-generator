@@ -72,6 +72,120 @@
             ],
             "maps": [],
             "id": 5
+        },
+        {
+            "name": "Jurassic Park - Ingen vs. Raptors",
+            "characters": [
+                "ingen",
+                "raptors"
+            ],
+            "maps": [
+                "raptor-paddock"
+            ],
+            "id": 6
+        },
+        {
+            "name": "Buffy the Vampire Slayer",
+            "characters": [
+                "buffy",
+                "angel",
+                "spike",
+                "willow"
+            ],
+            "maps": [
+                "sunnydale-high",
+                "the-bronze"
+            ],
+            "id": 7
+        },
+        {
+            "name": "Little Red Riding Hood vs. Beowulf",
+            "characters": [
+                "beowulf",
+                "little-red"
+            ],
+            "maps": [
+                "heorot"
+            ],
+            "id": 8
+        },
+        {
+            "name": "Deadpool",
+            "characters": [
+                "deadpool"
+            ],
+            "maps": [],
+            "id": 9
+        },
+        {
+            "name": "Hell's Kitchen",
+            "characters": [
+                "daredevil",
+                "bullseye",
+                "elektra"
+            ],
+            "maps": [
+                "hells-kitchen"
+            ],
+            "id": 10
+        },
+        {
+            "name": "Jurassic Park - Sattler vs. T-Rex",
+            "characters": [
+                "sattler",
+                "trex"
+            ],
+            "maps": [
+                "t-rex-paddock"
+            ],
+            "id": 11
+        },
+        {
+            "name": "Houdini vs. The Genie",
+            "characters": [
+                "houdini",
+                "genie"
+            ],
+            "maps": [
+                "king-solomons-mine"
+            ],
+            "id": 12
+        },
+        {
+            "name": "Teen Spirit",
+            "characters": [
+                "ms-marvel",
+                "squirrel-girl",
+                "cloak-and-dagger"
+            ],
+            "maps": [
+                "navy-pier"
+            ],
+            "id": 13
+        },
+        {
+            "name": "For King and Country",
+            "characters": [
+                "black-widow",
+                "black-panther",
+                "winter-soldier"
+            ],
+            "maps": [
+                "helicarrier"
+            ],
+            "id": 14
+        },
+        {
+            "name": "Brains and Brawn",
+            "characters": [
+                "spider-man",
+                "she-hulk",
+                "doctor-strange"
+            ],
+            "maps": [
+                "sanctum-sanctorum"
+            ],
+            "id": 15
         }
     ]
 }
