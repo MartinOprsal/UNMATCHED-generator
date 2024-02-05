@@ -3,6 +3,8 @@
 
 import setsData from "./setDatabase.json" assert { type: 'json' };;
 
+
+
 // Function to save checkbox states in local storage
 function saveCheckboxStates() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -29,6 +31,8 @@ document.getElementById('set-choice').addEventListener('change', (event) => {
         saveCheckboxStates();
     }
 });
+
+
 
 
 
@@ -190,6 +194,10 @@ function createMapUI(array, playersOutput, output) {
 function generateOutput(playerPairs) { // generates UI for players
     let output = document.getElementById("output-div")
     output.innerHTML = ""
+    if (checkIfChecked() === false) {
+        return false
+    }
+
 
 
     for (let i = 0; i < playerPairs.length; i++) {
@@ -264,6 +272,7 @@ function removePlayer(event) {
 
     // Remove the <li> element from the <ul>
     listOfPlayers.removeChild(listItem);
+    saveListToLocalStorage()
 }
 
 
@@ -288,8 +297,6 @@ function addPlayerFunction() {
 
         playerInput.value = " "
     }
-
-
 }
 
 
@@ -412,6 +419,25 @@ function shrinkArray(array, charactersForEachPlayer, numberOfPlayers) {
     return array
 }
 
+function checkIfChecked() {
+    let counter = 0
+    for (let i = 0; i < setsData.sets.length; i++) {
+        const setId = setsData.sets[i].id;
+        const setCheckbox = document.getElementById(setId);
+
+        if (setCheckbox && setCheckbox.checked) {
+            counter++
+        }
+
+    }
+
+    if (counter === 0) {
+        errorMessage("Choose sets")
+        return false
+
+    }
+}
+
 function errorMessage(text) {
     const output = document.getElementById("output-div")
     let message = document.createElement("h2")
@@ -433,8 +459,10 @@ function generate(characters, maps, names) {
 
     buttonOutput.innerHTML = ""
 
+
+
     maps = chooseMaps()
-    console.log(maps)
+
 
     names = makeArrayFromList()
 
@@ -461,13 +489,15 @@ function generate(characters, maps, names) {
 
         if (document.getElementById("spread").checked === true) {
             characterPool = chooseSets()
+
             characters = characterPool
+
         } else {
             numberForEach = document.getElementById("characters-for-each")
             characterPool = chooseSets().slice(0, numberForEach.value * numberOfPlayers)
+
             characters = shrinkArray(characterPool, numberForEach.value, numberOfPlayers)
             characters = shuffleArray(characters)
-            console.log(characters)
             if (characterPool.length < numberForEach.value * numberOfPlayers) {
                 output.innerHTML = ""
                 errorMessage("Not enough characters available")
@@ -479,7 +509,8 @@ function generate(characters, maps, names) {
             }
 
         }
-        console.log(characters)
+
+
 
 
         assignCharacters(players, splitArray(shuffleArray(characters), numberOfPlayers), numberOfPlayers)
@@ -550,4 +581,5 @@ function generate(characters, maps, names) {
 
 
 
-console.log(setsData.sets[5].maps.length)
+
+
