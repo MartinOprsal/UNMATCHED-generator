@@ -1,7 +1,8 @@
 /////////////////////////////////////////    IMPORTS   //////////////////////////////////////////////////////// 
 
 
-import setsData from "./setDatabase.json" assert { type: 'json' };;
+import setsData from "./setDatabase.json";
+//assert { type: 'json' };;
 
 
 
