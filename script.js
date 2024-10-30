@@ -1,7 +1,6 @@
 /////////////////////////////////////////    IMPORTS   //////////////////////////////////////////////////////// 
-let setsData = {}; // Initialize setsData as an empty object
+let setsData = {}; // Initialize setsData
 
-// Load the JSON data on page load
 window.onload = () => {
   fetch('./setDatabase.json')
     .then(response => {
@@ -12,11 +11,10 @@ window.onload = () => {
     })
     .then(data => {
       setsData = data;
-      loadCheckboxStates(); // Load checkbox states after JSON is loaded
+      loadCheckboxStates(); // Call other setup functions as needed
     })
     .catch(error => console.error('Error loading JSON:', error));
 };
-
 // Function to save checkbox states in local storage
 function saveCheckboxStates() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
