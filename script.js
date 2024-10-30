@@ -1,10 +1,13 @@
 /////////////////////////////////////////    IMPORTS   //////////////////////////////////////////////////////// 
+let setsData;
 
-
-import setsData from "./setDatabase.json";
-//assert { type: 'json' };;
-
-
+fetch('./setDatabase.json')
+  .then(response => response.json())
+  .then(data => {
+    setsData = data;
+    // Now you can use `setsData` in other functions
+  })
+  .catch(error => console.error('Error loading JSON:', error));
 
 // Function to save checkbox states in local storage
 function saveCheckboxStates() {
@@ -24,7 +27,7 @@ function loadCheckboxStates() {
 }
 
 // Load checkbox states on page load
-Window.onload = loadCheckboxStates();
+window.onload = loadCheckboxStates();
 
 // Add event listener to checkboxes to save states when changed
 document.getElementById('set-choice').addEventListener('change', (event) => {
