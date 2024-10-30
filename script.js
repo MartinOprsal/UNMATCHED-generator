@@ -1,13 +1,21 @@
 /////////////////////////////////////////    IMPORTS   //////////////////////////////////////////////////////// 
-let setsData;
+let setsData = {}; // Initialize setsData as an empty object
 
-fetch('./setDatabase.json')
-  .then(response => response.json())
-  .then(data => {
-    setsData = data;
-    // Now you can use `setsData` in other functions
-  })
-  .catch(error => console.error('Error loading JSON:', error));
+// Load the JSON data on page load
+window.onload = () => {
+  fetch('./setDatabase.json')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      setsData = data;
+      loadCheckboxStates(); // Load checkbox states after JSON is loaded
+    })
+    .catch(error => console.error('Error loading JSON:', error));
+};
 
 // Function to save checkbox states in local storage
 function saveCheckboxStates() {
