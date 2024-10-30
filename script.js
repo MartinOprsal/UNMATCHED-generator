@@ -23,24 +23,24 @@ function saveCheckboxStates() {
     });
 }
 
-// Function to load checkbox states from local storage
-function loadCheckboxStates() {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach((checkbox) => {
-        const isChecked = localStorage.getItem(checkbox.id) === 'true';
-        checkbox.checked = isChecked;
-    });
-}
-
-// Load checkbox states on page load
-window.onload = loadCheckboxStates();
+      // Function to load checkbox states from local storage
+    //  function loadCheckboxStates() {
+       //   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+         // checkboxes.forEach((checkbox) => {
+           //   const isChecked = localStorage.getItem(checkbox.id) === 'true';
+            //  checkbox.checked = isChecked;
+         // });
+     // }
+      
+      // Load checkbox states on page load
+      //window.onload = loadCheckboxStates();
 
 // Add event listener to checkboxes to save states when changed
-document.getElementById('set-choice').addEventListener('change', (event) => {
-    if (event.target.type === 'checkbox') {
-        saveCheckboxStates();
-    }
-});
+//document.getElementById('set-choice').addEventListener('change', (event) => {
+    //if (event.target.type === 'checkbox') {
+  //      saveCheckboxStates();
+    //}
+//});
 
 
 
